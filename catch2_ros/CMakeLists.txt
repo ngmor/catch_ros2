@@ -9,6 +9,7 @@ endif()
 ## DEPENDENCIES ##
 ##################
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 find_package(Catch2 REQUIRED)
 
 ###########
@@ -38,6 +39,9 @@ install(TARGETS ${PROJECT_NAME}
 
 # install include directories
 install(DIRECTORY include/ DESTINATION include/${PROJECT_NAME})
+
+# Install launch utilities
+ament_python_install_package(launch_${PROJECT_NAME} PACKAGE_DIR launch_${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
