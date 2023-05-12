@@ -13,6 +13,7 @@
 # limitations under the License.
 
 from launch.actions import Shutdown
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from typing import Iterable
 from typing import Optional
@@ -27,7 +28,6 @@ class Catch2IntegrationTestNode(Node):
     def __init__(
         self, *,
         executable: SomeSubstitutionsType,
-        result_file: SomeSubstitutionsType,
         package: Optional[SomeSubstitutionsType] = None,
         name: Optional[SomeSubstitutionsType] = None,
         namespace: Optional[SomeSubstitutionsType] = None,
@@ -39,12 +39,12 @@ class Catch2IntegrationTestNode(Node):
         **kwargs
     ) -> None:
         
-        # Add arguments for catch
+        # Add arguments for Catch
         arguments_appended = [
-                '--reporter',
-                ['JUnit::out=', result_file],
-                '--reporter',
-                'console::out=-::colour-mode=ansi'
+            '--reporter',
+            ['JUnit::out=', LaunchConfiguration('result_file')],
+            '--reporter',
+            'console::out=-::colour-mode=ansi'
         ]
 
         if arguments:
@@ -61,5 +61,6 @@ class Catch2IntegrationTestNode(Node):
             ros_arguments=ros_arguments,
             arguments=arguments_appended,
             on_exit=Shutdown(),
+            output='screen',
             **kwargs
         )
