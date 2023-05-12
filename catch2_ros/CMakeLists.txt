@@ -43,6 +43,9 @@ install(DIRECTORY include/ DESTINATION include/${PROJECT_NAME})
 # Install launch utilities
 ament_python_install_package(launch_${PROJECT_NAME} PACKAGE_DIR launch_${PROJECT_NAME})
 
+# Install custom test runner
+install(DIRECTORY scripts DESTINATION share/${PROJECT_NAME})
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
@@ -66,4 +69,11 @@ ament_export_dependencies(
   Catch2
 )
 
-ament_package()
+ament_package(CONFIG_EXTRAS
+  cmake/catch2_ros_add_integration_test.cmake
+)
+
+install(
+  DIRECTORY cmake
+  DESTINATION share/${PROJECT_NAME}
+)
