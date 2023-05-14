@@ -18,6 +18,10 @@ public:
   /// @param args - command string to parse into arguments
   SimulateArgs(const std::string & args);
 
+  /// @brief Store vector of arguments for use simulating arguments
+  /// @param args - vector of arguments
+  SimulateArgs(const std::vector<std::string> args);
+
   /// @brief generate argc
   /// @return argc, argument count
   int argc() const;
@@ -32,6 +36,9 @@ private:
 
   /// @brief pointers to string argument data
   std::vector<char *> argv_vec_ {};
+
+  /// @brief generate argv_vec_. For use in constructors.
+  void generate_argv_vec_();
 };
 
 /// @brief a class for splitting ROS arguments out of input arguments
@@ -52,9 +59,13 @@ public:
   /// @return argc if ROS args are taken out
   int argc_without_ros() const;
 
-  /// @brief return original argv, can also be used when ROS args are taken out
+  /// @brief return original argv
   /// @return original argv
   const char * const * argv() const;
+
+  /// @brief return argv if ROS args are taken out
+  /// @return argv if ROS args are taken out
+  const char * const * argv_without_ros() const;
 
 private:
   /// @brief original argc
@@ -63,8 +74,8 @@ private:
   /// @brief original argv
   const char * const * argv_;
 
-  /// @brief the index where ros args start
-  int ndx_ros_args_start_;
+  /// @brief SimulateArgs object that contains the arguments without ROS
+  SimulateArgs args_without_ros_;
 };
 }
 

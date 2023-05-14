@@ -11,6 +11,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_python REQUIRED)
 find_package(Catch2 REQUIRED)
+find_package(rclcpp REQUIRED)
 
 ###########
 ## Build ##
@@ -23,6 +24,9 @@ target_include_directories(${PROJECT_NAME}
   PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
+)
+target_link_libraries(${PROJECT_NAME} PUBLIC
+  rclcpp::rclcpp
 )
 
 #############
@@ -67,6 +71,7 @@ ament_export_targets(export_${PROJECT_NAME})
 
 ament_export_dependencies(
   Catch2
+  rclcpp
 )
 
 ament_package(CONFIG_EXTRAS
