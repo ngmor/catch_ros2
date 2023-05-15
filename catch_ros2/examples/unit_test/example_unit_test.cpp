@@ -39,10 +39,13 @@ TEST_CASE("parameters", "[parameters]") {
   // Assertions
   // Should be set to simulated parameter and not throw
   CHECK(node->get_parameter("param1").get_parameter_value().get<double>() == -1.4);
+
   // Should be set to default value
   CHECK(node->get_parameter("param2").get_parameter_value().get<double>() == 3.45);
+
   // Should be set to simulated parameter, not default value
   CHECK(node->get_parameter("param3").get_parameter_value().get<int>() == 14);
+
   // Should throw since it was never initialized
   CHECK_THROWS(node->declare_parameter<bool>("param4"));
 
@@ -50,4 +53,40 @@ TEST_CASE("parameters", "[parameters]") {
   rclcpp::shutdown();
 }
 
-// TODO(ngmor): test case for quotations
+TEST_CASE("complex parameters", "[parameters]") {
+  // The SimulateArgs class can also be used with more complex parameters included quotation marks
+  const auto args = SimulateArgs{
+    "/fake/path --ros-args -p param1:=1 "
+    "-p param2:=\"[2.0, 3.0, 4.0]\" -p param3:=\"/path/with spaces/\""
+  };
+
+  // Initialize ROS with simulated arguments
+  rclcpp::init(args.argc(), args.argv());
+
+  // Init test node
+  auto node = rclcpp::Node::make_shared("test_node");
+
+  // Test that parameters are received as expected by the node
+  node->declare_parameter<int>("param1");
+  node->declare_parameter<std::vector<double>>("param2");
+  node->declare_parameter<std::string>("param3", "default value");
+
+
+  // Assertions
+  // Should be set to simulated parameter and not throw
+  CHECK(node->get_parameter("param1").get_parameter_value().get<int>() == 1);
+  // Should be properly read as a list
+  const auto param2 =
+    node->get_parameter("param2").get_parameter_value().get<std::vector<double>>();
+  CHECK(param2.at(0) == 2.0);
+  CHECK(param2.at(1) == 3.0);
+  CHECK(param2.at(2) == 4.0);
+
+  // Should be set to simulated parameter, not default value
+  CHECK(
+    node->get_parameter(
+      "param3").get_parameter_value().get<std::string>() == "/path/with spaces/");
+
+  // Shutdown ROS
+  rclcpp::shutdown();
+}
