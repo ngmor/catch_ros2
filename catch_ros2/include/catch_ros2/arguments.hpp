@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef CATCH_ROS2_ARGUMENTS_INCLUDE_GUARD_H
-#define CATCH_ROS2_ARGUMENTS_ARGS_INCLUDE_GUARD_H
 /// @file
 /// @brief Utilities for handling command line arguments
+
+#ifndef CATCH_ROS2_ARGUMENTS_INCLUDE_GUARD_H
+#define CATCH_ROS2_ARGUMENTS_ARGS_INCLUDE_GUARD_H
 
 #include <vector>
 #include <string>
@@ -62,7 +63,6 @@ public:
   /// @brief find where ROS Args start
   /// @param argc - argument count
   /// @param argv - pointer to first argument data
-  /// TODO improve so the end of ROS args can also be detected (--)
   SplitROSArgs(const int argc, const char * const * argv);
 
   /// @brief return original argc

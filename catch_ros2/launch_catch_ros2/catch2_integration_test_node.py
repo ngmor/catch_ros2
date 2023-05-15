@@ -25,6 +25,7 @@ from launch_ros.remap_rule_type import SomeRemapRules
 
 
 class Catch2IntegrationTestNode(Node):
+    """A wrapper around Node which passes the "result_file" argument to Catch2 and shuts down on exit."""
     def __init__(
         self, *,
         executable: SomeSubstitutionsType,
