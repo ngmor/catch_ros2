@@ -36,6 +36,7 @@ class Catch2IntegrationTestNode(Node):
         remappings: Optional[SomeRemapRules] = None,
         ros_arguments: Optional[Iterable[SomeSubstitutionsType]] = None,
         arguments: Optional[Iterable[SomeSubstitutionsType]] = None,
+        output: SomeSubstitutionsType = 'screen',
         **kwargs
     ) -> None:
         
@@ -61,6 +62,6 @@ class Catch2IntegrationTestNode(Node):
             ros_arguments=ros_arguments,
             arguments=arguments_appended,
             on_exit=Shutdown(),
-            output='screen',
+            output=output,
             **kwargs
         )

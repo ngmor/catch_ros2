@@ -91,6 +91,11 @@ if(BUILD_TESTING)
   # ament_lint_auto_find_test_dependencies() # TODO uncomment
 endif()
 
+# Examples
+if (CATCH2_ROS_BUILD_EXAMPLES)
+  include(examples/integration_test/CMakeLists.txt)
+endif()
+
 # Export old-style CMake variables
 ament_export_include_directories("include/${PROJECT_NAME}")
 ament_export_libraries(${PROJECT_NAME} ${PROJECT_NAME}_with_main ${PROJECT_NAME}_with_node_main)
