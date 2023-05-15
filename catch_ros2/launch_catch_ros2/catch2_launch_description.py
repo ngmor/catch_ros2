@@ -20,10 +20,12 @@ from typing import Iterable
 from typing import Optional
 from typing import Text
 
+
 class Catch2LaunchDescription(LaunchDescription):
     """
-    A wrapper around LaunchDescription which adds a required "result_file" argument for the launch file.
-    
+    A wrapper around launch.LaunchDescription for Catch2 integration testing.
+
+    Adds a required "result_file" argument for the launch file.
     This file will hold the results of the test.
     """
 

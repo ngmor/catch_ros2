@@ -30,7 +30,9 @@ def separate_env_vars(env_str, env_argument_name, parser):
     try:
         index = env_str.index('=')
     except ValueError:
-        parser.error("--%s argument '%s' contains no equal sign" % (env_argument_name, env_str))
+        parser.error(
+            "--%s argument '%s' contains no equal sign" %
+            (env_argument_name, env_str))
     key = env_str[0:index]
     value = env_str[index + 1:]
     return key, value
@@ -176,7 +178,8 @@ def _run_test(parser, args, failure_result_file, output_handle):
                     value = env[key] + ';' + env_str
                     log(' - {0}+={1}'.format(key, env_str))
                 else:
-                    key, value = separate_env_vars(env_str, 'append-env', parser)
+                    key, value = separate_env_vars(
+                        env_str, 'append-env', parser)
                     log(' - {0}+={1}'.format(key, value))
                 if key not in env:
                     env[key] = ''
@@ -223,7 +226,8 @@ def _run_test(parser, args, failure_result_file, output_handle):
         if output_handle:
             # separate progress of this script from subprocess output
             output_handle.write('\n\n'.encode())
-        log('-- run_test.py: return code ' + str(rc), file=sys.stderr if rc else sys.stdout)
+        log('-- run_test.py: return code ' + str(rc),
+            file=sys.stderr if rc else sys.stdout)
     except Exception as e:
         if output_handle:
             # separate subprocess output from progress of this script
@@ -238,8 +242,10 @@ def _run_test(parser, args, failure_result_file, output_handle):
         # generate result file with one passed test
         # if it was expected that no result file was generated
         # and the command returned with code zero
-        log("-- run_test.py: generate result file '%s' with successful test" % args.result_file)
-        success_result_file = _generate_result(args.result_file, test_time=test_time)
+        log("-- run_test.py: generate result file '%s' with successful test" %
+            args.result_file)
+        success_result_file = _generate_result(
+            args.result_file, test_time=test_time)
         with open(args.result_file, 'w') as h:
             h.write(success_result_file)
 
@@ -254,15 +260,18 @@ def _run_test(parser, args, failure_result_file, output_handle):
                     '-- run_test.py: generate result file '
                     "'%s' with skipped test" % args.result_file)
                 # regenerate result file to indicate that the test was skipped
-                result_file = _generate_result(args.result_file, skip=True, test_time=test_time)
+                result_file = _generate_result(
+                    args.result_file, skip=True, test_time=test_time)
             else:
-                log(
-                    '-- run_test.py: generate result file '
-                    "'%s' with failed test" % args.result_file, file=sys.stderr)
-                # regenerate result file to include output / exception of the invoked command
+                log('-- run_test.py: generate result file '
+                    "'%s' with failed test" %
+                    args.result_file, file=sys.stderr)
+                # regenerate result file to include output / exception of the
+                # invoked command
                 result_file = _generate_result(
                     args.result_file,
-                    error_message='The test did not generate a result file:\n\n' + output,
+                    error_message='The test did not generate a result file:\n\n' +
+                    output,
                     test_time=test_time)
             with open(args.result_file, 'w') as h:
                 h.write(result_file)
@@ -315,21 +324,25 @@ def _run_test(parser, args, failure_result_file, output_handle):
 
     return rc
 
+
 def _check_for_failure(tree):
     # Check tree for failures in nodes
     root = tree.getroot()
     return _check_for_failure_recursive(root)
 
+
 def _check_for_failure_recursive(node):
     # Recursively check node and subnodes for test error or failure
-    if (int(node.attrib.get('errors', 0))) or (int(node.attrib.get('failures', 0))):
+    if (int(node.attrib.get('errors', 0))) or (
+            int(node.attrib.get('failures', 0))):
         return True
-    
+
     for child in node:
         if _check_for_failure_recursive(child):
             return True
-    
+
     return False
+
 
 def _generate_result(result_file, *, failure_message=None, skip=False,
                      error_message=None, test_time=0):
@@ -403,6 +416,7 @@ def _tidy_xml(filename):
     with open(filename, 'w', encoding='utf-8') as h:
         h.write(data)
     return True
+
 
 if __name__ == '__main__':
     sys.exit(main())
