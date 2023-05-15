@@ -3,13 +3,6 @@
 # (such as the boilerplate ROS 2 items added when using ros2 pkg create)
 # are omitted.
 
-# DO NOT INCLUDE ITEMS BETWEEN THESE LINES
-# in your typical usage of catch2_ros. They are only included here so
-# this file can be include in the top level CMakeLists.txt
-set(catch2_ros_DIR ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/cmake)
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/catch2_ros_add_integration_test.cmake)
-# DO NOT INCLUDE ITEMS BETWEEN THESE LINES
-
 # THIS LINE SHOULD BE UNCOMMENTED - it is only commented here
 # so this file can be included in the top level CMakeLists.txt
 # find_package(catch2_ros REQUIRED) # UNCOMMENT

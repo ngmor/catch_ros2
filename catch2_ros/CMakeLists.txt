@@ -93,6 +93,10 @@ endif()
 
 # Examples
 if (CATCH2_ROS_BUILD_EXAMPLES)
+  # Set directories and include CMake function for use in examples
+  set(catch2_ros_DIR ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/cmake)
+  include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/catch2_ros_add_integration_test.cmake)
+
   include(examples/integration_test/CMakeLists.txt)
   include(examples/unit_test/CMakeLists.txt)
 endif()
