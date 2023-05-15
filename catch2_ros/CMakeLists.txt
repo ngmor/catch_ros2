@@ -17,16 +17,45 @@ find_package(rclcpp REQUIRED)
 ## Build ##
 ###########
 
+# Base Library
 add_library(${PROJECT_NAME} SHARED 
   src/arguments.cpp
 )
+add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
 target_include_directories(${PROJECT_NAME}
   PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
 )
 target_link_libraries(${PROJECT_NAME} PUBLIC
-  rclcpp::rclcpp
+  rclcpp::rclcpp Catch2
+)
+
+# Library with Catch2 default main
+# https://stackoverflow.com/questions/34234446/cmake-is-it-possible-to-build-an-executable-from-only-static-libraries-and-no-s
+file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/null.cpp "")
+
+add_library(${PROJECT_NAME}_with_main ${CMAKE_CURRENT_BINARY_DIR}/null.cpp)
+add_library(${PROJECT_NAME}::${PROJECT_NAME}_with_main ALIAS ${PROJECT_NAME}_with_main)
+target_link_libraries(${PROJECT_NAME}_with_main PUBLIC
+  ${PROJECT_NAME} Catch2::Catch2WithMain
+)
+set_target_properties(${PROJECT_NAME}_with_main
+  PROPERTIES
+  OUTPUT_NAME "${PROJECT_NAME}_with_main"
+)
+
+# Library with custom main for running nodes
+add_library(${PROJECT_NAME}_with_node_main
+  src/main.cpp
+)
+add_library(${PROJECT_NAME}::${PROJECT_NAME}_with_node_main ALIAS ${PROJECT_NAME}_with_node_main)
+target_link_libraries(${PROJECT_NAME}_with_node_main PUBLIC
+  ${PROJECT_NAME} Catch2
+)
+set_target_properties(${PROJECT_NAME}_with_node_main
+  PROPERTIES
+  OUTPUT_NAME "${PROJECT_NAME}_with_node_main"
 )
 
 #############
@@ -34,7 +63,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 #############
 
 # install targets
-install(TARGETS ${PROJECT_NAME}
+install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_with_main ${PROJECT_NAME}_with_node_main
   EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
@@ -64,7 +93,7 @@ endif()
 
 # Export old-style CMake variables
 ament_export_include_directories("include/${PROJECT_NAME}")
-ament_export_libraries(${PROJECT_NAME})
+ament_export_libraries(${PROJECT_NAME} ${PROJECT_NAME}_with_main ${PROJECT_NAME}_with_node_main)
 
 # Export modern CMake targets
 ament_export_targets(export_${PROJECT_NAME})
