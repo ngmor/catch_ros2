@@ -1,5 +1,5 @@
 """
-An example launch file for running an integration test with catch2_ros.
+An example launch file for running an integration test with catch_ros2.
 
 It runs an auxiliary test node (the node under test), and an integration
 test node (the node which performs the test).
@@ -8,7 +8,7 @@ test node (the node which performs the test).
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
-from launch_catch2_ros import Catch2LaunchDescription, Catch2IntegrationTestNode
+from launch_catch_ros2 import Catch2LaunchDescription, Catch2IntegrationTestNode
 
 
 def generate_launch_description():
@@ -25,7 +25,7 @@ def generate_launch_description():
         ),
         # Auxiliary nodes can be run like normal to test integration between nodes
         Node(
-            package='catch2_ros',
+            package='catch_ros2',
             executable='integration_aux_node',
         ),
         # Catch2IntegrationTestNode:
@@ -35,7 +35,7 @@ def generate_launch_description():
         # Specific parameters can also be passed, like the "test_duration" example
         # below.
         Catch2IntegrationTestNode(
-            package='catch2_ros',
+            package='catch_ros2',
             executable='integration_test_node',
             parameters=[{
                 'test_duration': LaunchConfiguration('test_duration'),

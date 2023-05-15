@@ -5,7 +5,7 @@
 
 # THIS LINE SHOULD BE UNCOMMENTED - it is only commented here
 # so this file can be included in the top level CMakeLists.txt
-# find_package(catch2_ros REQUIRED) # UNCOMMENT
+# find_package(catch_ros2 REQUIRED) # UNCOMMENT
 find_package(rclcpp REQUIRED)
 find_package(std_srvs REQUIRED)
 
@@ -37,11 +37,11 @@ if(BUILD_TESTING)
   add_executable(integration_test_node
     examples/integration_test/integration_test_node.cpp
   )
-  # The link libraries call links this node with catch2::catch2_ros_with_node_main
+  # The link libraries call links this node with catch_ros2::catch_ros2_with_node_main
   # to get the default integration test node main function
   # TODO - add link
   target_link_libraries(integration_test_node
-    catch2_ros::catch2_ros_with_node_main
+    catch_ros2::catch_ros2_with_node_main
   )
   ament_target_dependencies(integration_test_node
     rclcpp std_srvs
@@ -67,7 +67,7 @@ if(BUILD_TESTING)
   # when running "colcon test".
   # See here for more information:
   # TODO add link
-  catch2_ros_add_integration_test(ExampleIntegration_Test
+  catch_ros2_add_integration_test(ExampleIntegration_Test
     LAUNCH_FILE example_integration_test.launch.py
   )
 

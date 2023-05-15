@@ -1,11 +1,11 @@
 #include <catch2/catch_session.hpp>
-#include "catch2_ros/arguments.hpp"
+#include "catch_ros2/arguments.hpp"
 #include "rclcpp/rclcpp.hpp"
 
 int main(int argc, char * argv[])
 {
   // Split input ROS args from args that will be input to Catch
-  const auto split = catch2_ros::SplitROSArgs{argc, argv};
+  const auto split = catch_ros2::SplitROSArgs{argc, argv};
 
   // Init ROS
   rclcpp::init(split.argc(), split.argv());

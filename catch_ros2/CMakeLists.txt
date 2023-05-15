@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(catch2_ros)
+project(catch_ros2)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -92,10 +92,10 @@ if(BUILD_TESTING)
 endif()
 
 # Examples
-if (CATCH2_ROS_BUILD_EXAMPLES)
+if (CATCH_ROS2_BUILD_EXAMPLES)
   # Set directories and include CMake function for use in examples
-  set(catch2_ros_DIR ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/cmake)
-  include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/catch2_ros_add_integration_test.cmake)
+  set(catch_ros2_DIR ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/cmake)
+  include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/catch_ros2_add_integration_test.cmake)
 
   include(examples/integration_test/CMakeLists.txt)
   include(examples/unit_test/CMakeLists.txt)
@@ -114,7 +114,7 @@ ament_export_dependencies(
 )
 
 ament_package(CONFIG_EXTRAS
-  cmake/catch2_ros_add_integration_test.cmake
+  cmake/catch_ros2_add_integration_test.cmake
 )
 
 install(

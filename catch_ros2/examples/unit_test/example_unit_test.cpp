@@ -1,10 +1,10 @@
-/// @file - Example unit tests using catch2_ros utilities.
+/// @file - Example unit tests using catch_ros2 utilities.
 
 #include <catch2/catch_test_macros.hpp>
-#include "catch2_ros/arguments.hpp"
+#include "catch_ros2/arguments.hpp"
 #include "rclcpp/rclcpp.hpp"
 
-using catch2_ros::SimulateArgs;
+using catch_ros2::SimulateArgs;
 
 TEST_CASE("parameters", "[parameters]") {
 

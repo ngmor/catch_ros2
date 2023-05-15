@@ -1,8 +1,8 @@
-#include "catch2_ros/arguments.hpp"
+#include "catch_ros2/arguments.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include <sstream>
 
-namespace catch2_ros
+namespace catch_ros2
 {
 SimulateArgs::SimulateArgs(const std::string & args)
 {

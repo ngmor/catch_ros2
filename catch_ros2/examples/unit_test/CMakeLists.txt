@@ -5,7 +5,7 @@
 
 # THIS LINE SHOULD BE UNCOMMENTED - it is only commented here
 # so this file can be included in the top level CMakeLists.txt
-# find_package(catch2_ros REQUIRED) # UNCOMMENT
+# find_package(catch_ros2 REQUIRED) # UNCOMMENT
 
 if(BUILD_TESTING)
   include(CTest)
@@ -16,10 +16,10 @@ if(BUILD_TESTING)
   add_executable(example_unit_test
     examples/unit_test/example_unit_test.cpp
   )
-  # Linking a unit test executable with catch2_ros::catch2_ros_with_main
+  # Linking a unit test executable with catch_ros2::catch_ros2_with_main
   # Provides the default Catch2 main function to the executable.
   target_link_libraries(example_unit_test
-    catch2_ros::catch2_ros_with_main
+    catch_ros2::catch_ros2_with_main
   )
   add_test(NAME ExampleUnitTest COMMAND example_unit_test)
 endif()

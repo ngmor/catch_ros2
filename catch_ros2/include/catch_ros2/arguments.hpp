@@ -1,12 +1,12 @@
-#ifndef CATCH2_ROS_ARGUMENTS_INCLUDE_GUARD_H
-#define CATCH2_ROS_ARGUMENTS_ARGS_INCLUDE_GUARD_H
+#ifndef CATCH_ROS2_ARGUMENTS_INCLUDE_GUARD_H
+#define CATCH_ROS2_ARGUMENTS_ARGS_INCLUDE_GUARD_H
 /// @file
 /// @brief Utilities for handling command line arguments
 
 #include <vector>
 #include <string>
 
-namespace catch2_ros
+namespace catch_ros2
 {
 /// @brief A class for generating simulated argc/argv values from an input string
 /// https://stackoverflow.com/questions/39883433/create-argc-argv-in-the-code

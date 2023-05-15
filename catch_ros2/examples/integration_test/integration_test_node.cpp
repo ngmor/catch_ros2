@@ -14,7 +14,7 @@ TEST_CASE("example_integration_test", "[integration]") {
   auto node = rclcpp::Node::make_shared("integration_test_node");
   
   // Declare a parameter on the node
-  // (the default catch2_ros node main will allow ROS arguments
+  // (the default catch_ros2 node main will allow ROS arguments
   // like parameters to be passed to nodes in test files)
   node->declare_parameter<double>("test_duration");
 
