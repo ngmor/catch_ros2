@@ -35,6 +35,8 @@ install(TARGETS
 )
 
 if(BUILD_TESTING)
+  include(CTest)
+
   ###########################
   ## INTEGRATION TEST NODE ##
   ###########################

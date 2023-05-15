@@ -94,6 +94,7 @@ endif()
 # Examples
 if (CATCH2_ROS_BUILD_EXAMPLES)
   include(examples/integration_test/CMakeLists.txt)
+  include(examples/unit_test/CMakeLists.txt)
 endif()
 
 # Export old-style CMake variables
