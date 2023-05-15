@@ -24,8 +24,6 @@
 namespace catch_ros2
 {
 /// @brief A class for generating simulated argc/argv values from an input string
-/// https://stackoverflow.com/questions/39883433/create-argc-argv-in-the-code
-/// TODO - improve so this can handle quotations in the input string properly
 class SimulateArgs
 {
 public:
@@ -55,6 +53,7 @@ private:
   /// @brief generate argv_vec_. For use in constructors.
   void generate_argv_vec_();
 };
+
 
 /// @brief a class for splitting ROS arguments out of input arguments
 class SplitROSArgs
@@ -91,6 +90,12 @@ private:
   /// @brief SimulateArgs object that contains the arguments without ROS
   SimulateArgs args_without_ros_;
 };
+
+
+/// @brief split a string by whitespace, ignoring whitespace in quotes
+/// @param input_string - string to split
+/// @return vector of split strings
+std::vector<std::string> tokenize(const std::string & input_string);
 }  // namespace catch_ros2
 
 #endif  // CATCH_ROS2__ARGUMENTS_HPP_
