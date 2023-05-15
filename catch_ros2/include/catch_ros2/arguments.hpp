@@ -15,8 +15,8 @@
 /// @file
 /// @brief Utilities for handling command line arguments
 
-#ifndef CATCH_ROS2_ARGUMENTS_INCLUDE_GUARD_H
-#define CATCH_ROS2_ARGUMENTS_ARGS_INCLUDE_GUARD_H
+#ifndef CATCH_ROS2__ARGUMENTS_HPP_
+#define CATCH_ROS2__ARGUMENTS_HPP_
 
 #include <vector>
 #include <string>
@@ -31,11 +31,11 @@ class SimulateArgs
 public:
   /// @brief Parse string into data structures that can be used to generate simulated argc/argvs
   /// @param args - command string to parse into arguments
-  SimulateArgs(const std::string & args);
+  explicit SimulateArgs(const std::string & args);
 
   /// @brief Store vector of arguments for use simulating arguments
   /// @param args - vector of arguments
-  SimulateArgs(const std::vector<std::string> args);
+  explicit SimulateArgs(const std::vector<std::string> args);
 
   /// @brief generate argc
   /// @return argc, argument count
@@ -91,6 +91,6 @@ private:
   /// @brief SimulateArgs object that contains the arguments without ROS
   SimulateArgs args_without_ros_;
 };
-}
+}  // namespace catch_ros2
 
-#endif
+#endif  // CATCH_ROS2__ARGUMENTS_HPP_

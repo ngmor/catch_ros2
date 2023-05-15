@@ -17,9 +17,9 @@
 /// This header just includes all the headers for easier use,
 /// but you may include headers of individual features instead if you want
 
-#ifndef CATCH_ROS2_INCLUDE_GUARD_HPP
-#define CATCH_ROS2_INCLUDE_GUARD_HPP
+#ifndef CATCH_ROS2__CATCH_ROS2_HPP_
+#define CATCH_ROS2__CATCH_ROS2_HPP_
 
 #include "catch_ros2/arguments.hpp"
 
-#endif
+#endif  // CATCH_ROS2__CATCH_ROS2_HPP_

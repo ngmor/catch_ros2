@@ -1,3 +1,17 @@
+// Copyright 2023 Nick Morales.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 /// @file - Example unit tests using catch_ros2 utilities.
 
 #include <catch2/catch_test_macros.hpp>
@@ -7,7 +21,6 @@
 using catch_ros2::SimulateArgs;
 
 TEST_CASE("parameters", "[parameters]") {
-
   // The SimulateArgs class can be used to synthesize input arguments for rclcpp::init()
   const auto args = SimulateArgs{"/fake/path --ros-args -p param1:=-1.4 -p param3:=14"};
 
@@ -33,8 +46,8 @@ TEST_CASE("parameters", "[parameters]") {
   // Should throw since it was never initialized
   CHECK_THROWS(node->declare_parameter<bool>("param4"));
 
-  //Shutdown ROS
+  // Shutdown ROS
   rclcpp::shutdown();
 }
 
-//TODO test case for quotations
+// TODO(ngmor): test case for quotations

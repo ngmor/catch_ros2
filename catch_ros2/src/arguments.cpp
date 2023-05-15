@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <sstream>
 #include "catch_ros2/arguments.hpp"
 #include "rclcpp/rclcpp.hpp"
-#include <sstream>
 
 namespace catch_ros2
 {
@@ -49,7 +49,7 @@ void SimulateArgs::generate_argv_vec_()
 {
   // Create char* vector to hold pointers to each element of the argument vector
   for (const auto & arg : args_) {
-    argv_vec_.push_back((char *)arg.data());
+    argv_vec_.push_back(const_cast<char *>(arg.data()));
   }
   argv_vec_.push_back(nullptr);
 }
@@ -68,4 +68,4 @@ int SplitROSArgs::argc_without_ros() const {return args_without_ros_.argc();}
 const char * const * SplitROSArgs::argv() const {return argv_;}
 
 const char * const * SplitROSArgs::argv_without_ros() const {return args_without_ros_.argv();}
-}
+}  // namespace catch_ros2
