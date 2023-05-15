@@ -4,7 +4,8 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_srvs/srv/empty.hpp"
 
-int main(int argc, char * argv[]) {
+int main(int argc, char * argv[])
+{
   rclcpp::init(argc, argv);
   auto node = rclcpp::Node::make_shared("integration_aux_node");
   auto service = node->create_service<std_srvs::srv::Empty>(
@@ -12,7 +13,7 @@ int main(int argc, char * argv[]) {
     [](
       const std_srvs::srv::Empty::Request::SharedPtr,
       std_srvs::srv::Empty::Response::SharedPtr
-    ){}
+    ) {}
   );
   rclcpp::spin(node);
   rclcpp::shutdown();

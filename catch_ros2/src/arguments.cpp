@@ -34,8 +34,8 @@ SimulateArgs::SimulateArgs(const std::string & args)
   generate_argv_vec_();
 }
 
-SimulateArgs::SimulateArgs(const std::vector<std::string> args):
-  args_{args}
+SimulateArgs::SimulateArgs(const std::vector<std::string> args)
+: args_{args}
 {
   // Generate argv_vec_
   generate_argv_vec_();
@@ -45,7 +45,8 @@ int SimulateArgs::argc() const {return argv_vec_.size() - 1;}
 
 const char * const * SimulateArgs::argv() const {return argv_vec_.data();}
 
-void SimulateArgs::generate_argv_vec_() {
+void SimulateArgs::generate_argv_vec_()
+{
   // Create char* vector to hold pointers to each element of the argument vector
   for (const auto & arg : args_) {
     argv_vec_.push_back((char *)arg.data());
@@ -54,9 +55,8 @@ void SimulateArgs::generate_argv_vec_() {
 }
 
 
-
-SplitROSArgs::SplitROSArgs(const int argc, const char * const * argv):
-  argc_{argc},
+SplitROSArgs::SplitROSArgs(const int argc, const char * const * argv)
+: argc_{argc},
   argv_{argv},
   args_without_ros_{SimulateArgs{rclcpp::remove_ros_arguments(argc_, argv_)}}
 {}

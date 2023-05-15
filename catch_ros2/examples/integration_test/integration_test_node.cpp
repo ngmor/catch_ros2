@@ -12,7 +12,7 @@ TEST_CASE("example_integration_test", "[integration]") {
   // Create a simple client node to check if the auxiliary node
   // has a service available
   auto node = rclcpp::Node::make_shared("integration_test_node");
-  
+
   // Declare a parameter on the node
   // (the default catch_ros2 node main will allow ROS arguments
   // like parameters to be passed to nodes in test files)
@@ -21,7 +21,8 @@ TEST_CASE("example_integration_test", "[integration]") {
   // Get value of the parameter
   // This line will cause a runtime error if a value
   // for the "test_duration" parameter is not passed to the node
-  const auto TEST_DURATION = node->get_parameter("test_duration").get_parameter_value().get<double>();
+  const auto TEST_DURATION =
+    node->get_parameter("test_duration").get_parameter_value().get<double>();
 
   // Create a client for the service we're looking for
   auto client = node->create_client<std_srvs::srv::Empty>("test_service");
@@ -36,7 +37,8 @@ TEST_CASE("example_integration_test", "[integration]") {
   while (
     rclcpp::ok() &&
     ((rclcpp::Clock().now() - start_time) < rclcpp::Duration::from_seconds(TEST_DURATION))
-  ) {
+  )
+  {
     // Repeatedly check for the dummy service until its found
     if (client->wait_for_service(0s)) {
       service_found = true;

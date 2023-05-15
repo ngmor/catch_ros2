@@ -26,6 +26,7 @@ class Catch2LaunchDescription(LaunchDescription):
     
     This file will hold the results of the test.
     """
+
     def __init__(
         self,
         initial_entities: Optional[Iterable[LaunchDescriptionEntity]] = None,

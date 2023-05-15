@@ -21,7 +21,7 @@ TEST_CASE("parameters", "[parameters]") {
   node->declare_parameter<double>("param1");
   node->declare_parameter<double>("param2", 3.45);
   node->declare_parameter<int>("param3", 2);
-  
+
 
   // Assertions
   // Should be set to simulated parameter and not throw

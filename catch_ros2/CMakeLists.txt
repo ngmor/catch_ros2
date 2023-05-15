@@ -18,7 +18,7 @@ find_package(rclcpp REQUIRED)
 ###########
 
 # Base Library
-add_library(${PROJECT_NAME} SHARED 
+add_library(${PROJECT_NAME} SHARED
   src/arguments.cpp
 )
 add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
@@ -88,11 +88,11 @@ if(BUILD_TESTING)
   # comment the line when this package is in a git repo and when
   # a copyright and license is added to all source files
   set(ament_cmake_cpplint_FOUND TRUE)
-  # ament_lint_auto_find_test_dependencies() # TODO uncomment
+  ament_lint_auto_find_test_dependencies() # TODO uncomment
 endif()
 
 # Examples
-if (CATCH_ROS2_BUILD_EXAMPLES)
+if(CATCH_ROS2_BUILD_EXAMPLES)
   # Set directories and include CMake function for use in examples
   set(catch_ros2_DIR ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/cmake)
   include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/catch_ros2_add_integration_test.cmake)

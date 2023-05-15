@@ -14,11 +14,11 @@
 
 #
 # Add a launch integration test.
-# 
+#
 # Test should launch from a launch file installed to the package's share space.
 # Use the launch_catch_ros2 Python module to create a Python launch file for
 # this purpose. See the examples directory for examples.
-# 
+#
 # :param testname: the name of the test
 # :type testname: string
 # :param LAUNCH_FILE: the launch file used to start the test, required
@@ -28,7 +28,7 @@
 # :param RESULT_FILE: the path of the result file from the test
 #   default: ${AMENT_TEST_RESULTS_DIR}/${PROJECT_NAME}/${testname}.xml
 # :type RESULT_FILE: string
-# :param RESULT_FILE_PARAMETER_NAME: the name of the parameter that sets the 
+# :param RESULT_FILE_PARAMETER_NAME: the name of the parameter that sets the
 #   location of the result file in the launch file. Should not be modified if using
 #   launch_catch_ros2. Default: "result_file"
 # :type RESULT_FILE_PARAMETER_NAME: string
