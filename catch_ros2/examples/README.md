@@ -16,7 +16,7 @@ You can also [customize further](#selecting-a-main-function) if you need further
 ## Integration Testing
 Integration testing is an important way to ensure different elements of your system work together as desired. In ROS, we generally want to test that our nodes behave correctly, which may difficult with typical unit testing.
 
-ROS 2 already contains a [framework for writing integration tests in Python](https://github.com/ros2/launch/tree/rolling/launch_testing) which may be more than sufficient for most users. However, to my knowledge I have not seen an easy way to create integration tests in C++ or more specifically with Catch2. The primary motivation of this package is to provide a framework for just that.
+ROS 2 already contains a [framework for writing integration tests in Python](https://github.com/ros2/launch/tree/rolling/launch_testing) which may be more than sufficient for most users. However, to my knowledge I have not seen an easy way to create integration tests in C++ (or more specifically with Catch2). The primary motivation of this package is to provide a framework for just that.
 
 ### Components
 For a launch integration test in this framework you need 4 components:
@@ -31,16 +31,16 @@ These are the nodes in your package whose functionality you'd like to test. Noth
 #### Testing node
 This node is specifically written with Catch2 test cases and assertions to test the functionality of other nodes. The example has [`integration_test_node`](integration_test/integration_test_node.cpp) as the testing node.
 
-If it is linked with `catch_ros2::catch_ros2_with_node_main` (see [CMake setup](#integration-cmake-setup)) it does not require a `main` function and can be run just like any other ROS 2 node (`ros2 run ${package_name} ${executable_name}`). Tests can be executed manually by just running the node like this.
+If it is linked with `catch_ros2::catch_ros2_with_node_main` (see [CMake setup](#integration-cmake-setup)) it does not require a `main` function and can be run just like any other ROS 2 node (`ros2 run ${package_name} ${executable_name}`). Tests can be executed manually by just running the node like this (along with other needed nodes).
 
 If more precise functionality beyond the [default node main](../src/main.cpp) of this package is desired, see [selecting a main function](#selecting-a-main-function).
 
 #### Launch file
-To automate the integration test, a [Python launch file](integration_test/example_integration_test.launch.py) can be used to launch all the necessary nodes for the test, including the test node.
+To automate the integration test, a [Python launch file](integration_test/example_integration_test.launch.py) can be used to launch all the necessary nodes for the test, including the test node. An integration test can also be run manually by simply launching this launch file (make sure to set the "result_file" argument).
 
 This launch file is the same as any other ROS 2 Python launch file, but the `launch_catch_ros2` Python module provides a few useful classes:
-- `Catch2LaunchDescription` - a wrapper around the typical `launch.LaunchDescription` that includes a required "result_file" argument where the results of the test will be output.
-- `Catch2IntegrationTestNode` - a wrapper around the typical `launch_ros.actions.Node` that passes the "result_file" argument to Catch2 (as per the default catch_ros2 main function) and shuts down all nodes on exit. This should be used to launch the [testing node](#testing-node). Only one should be used per integration test.
+- `Catch2LaunchDescription` - a wrapper around the typical [`launch.LaunchDescription`](https://github.com/ros2/launch/blob/rolling/launch/launch/launch_description.py) that includes a required "result_file" argument where the results of the test will be output.
+- `Catch2IntegrationTestNode` - a wrapper around the typical [`launch_ros.actions.Node`](https://github.com/ros2/launch_ros/blob/rolling/launch_ros/launch_ros/actions/node.py) that passes the "result_file" argument to Catch2 (via the default `catch_ros2` node main function) and shuts down all nodes on exit. This should be used to launch the [testing node](#testing-node). Only one should be used per integration test.
 
 #### Integration CMake setup
 Most of the [CMake required for this integration test](integration_test/CMakeLists.txt) is pretty standard for a ROS 2 package (though the ROS 2 boilerplate CMake is not shown in this example). Nodes are built/installed and the launch file is installed to the package's share directory.
@@ -51,7 +51,7 @@ target_link_libraries(integration_test_node
   catch_ros2::catch_ros2_with_node_main
 )
 ```
-This links the integration test node with the version of `catch_ros2` that includes the [default main for writing nodes](../src/main.cpp). Only one version of the `catch_ros2` library need be linked to a target, depending on the need for a default main. See [selecting a main function](#selecting-a-main-function).
+This links the integration test node with the version of `catch_ros2` that includes the [default main for running test nodes](../src/main.cpp). Only one version of the `catch_ros2` library need be linked to a target, depending on the need for a default main. See [selecting a main function](#selecting-a-main-function).
 
 ```
 catch_ros2_add_integration_test(ExampleIntegration_Test
@@ -82,12 +82,18 @@ target_link_libraries(example_unit_test
 ```
 
 ### Utilities
+`catch_ros2` provides some utility functions for unit testing in ROS 2.
+
+- [Arguments](../include/catch_ros2/arguments.hpp) - utilities for handling command line arguments.
+  - `SimulateArgs` - allows you to pass in a string or vector of strings representing command line arguments to create simulated `argc` and `argv` values to pass into functions or `rclcpp::init()`.
+  - `SplitROSArgs` - removes ROS arguments from an input `argc` and `argv`, so these arguments won't cause problems for other functions (like Catch2 sessions).
+  - `tokenize` - splits a command line string into a vector of strings, ignoring whitespace in quotation marks.
 
 ## Selecting a main function
-There are three options for a main function when using `catch_ros2`. Which is option is selected depends on which library you link your target to - you should only link to one.
+There are three options for a main function when using `catch_ros2`. Which option is selected depends on which library you link your target to - you should only link to one.
 
 ### 1. Default Node Main
-This node main function (defined [here](../src/main.cpp)) is good for writing ROS 2 test nodes that use Catch2 (ex: for integration tests). It initializes the ROS context with the input arguments, removes the ROS arguments from the input list, runs the Catch session, then shuts down ROS.
+This test node main function (defined [here](../src/main.cpp)) is good for writing ROS 2 test nodes that use Catch2 (ex: for integration tests). It initializes the ROS context with the input arguments, removes the ROS arguments from the input list, runs the Catch session, then shuts down ROS.
 
 You can use this main by linking to `catch_ros2::catch_ros2_with_node_main`:
 ```
