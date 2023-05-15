@@ -39,7 +39,6 @@ if(BUILD_TESTING)
   )
   # The link libraries call links this node with catch_ros2::catch_ros2_with_node_main
   # to get the default integration test node main function
-  # TODO - add link
   target_link_libraries(integration_test_node
     catch_ros2::catch_ros2_with_node_main
   )
@@ -65,8 +64,6 @@ if(BUILD_TESTING)
   ######################
   # This CMake function allows the integration test to be run
   # when running "colcon test".
-  # See here for more information:
-  # TODO add link
   catch_ros2_add_integration_test(ExampleIntegration_Test
     LAUNCH_FILE example_integration_test.launch.py
   )
