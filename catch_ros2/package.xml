@@ -6,6 +6,9 @@
   <description>Catch2 testing framework for ROS 2 unit and integration tests.</description>
   <maintainer email="ngmorales97@gmail.com">Nick Morales</maintainer>
   <license>Apache License 2.0</license>
+  <author email="ngmorales97@gmail.com">Nick Morales</author>
+  <author email="elwin@northwestern.edu">Matthew Elwin</author>
+  <author email="yinhang0226@gmail.com">Hang-Yin</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 

@@ -1,12 +1,6 @@
 # Example Usage
 These directories contain examples of how to use the `catch_ros2` library. This README provides an overview, but more details can be found in the source code.
 
-To build these examples, use the following from the root of your workspace:
-
-```
-colcon build --cmake-args -DCATCH_ROS2_BUILD_EXAMPLES=TRUE
-```
-
 There are two basic ways to use this framework:
 1. [Integration testing](#integration-testing)
 2. [Unit testing](#unit-testing)
