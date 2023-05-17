@@ -99,7 +99,7 @@ if(BUILD_TESTING)
 endif()
 
 # Export old-style CMake variables
-ament_export_include_directories("include/${PROJECT_NAME}")
+ament_export_include_directories("include")
 ament_export_libraries(${PROJECT_NAME} ${PROJECT_NAME}_with_main ${PROJECT_NAME}_with_node_main)
 
 # Export modern CMake targets
