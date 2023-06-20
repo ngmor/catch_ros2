@@ -41,6 +41,7 @@ class Catch2LaunchDescription(LaunchDescription):
             DeclareLaunchArgument(
                 name='result_file',
                 description='Catch 2 test result file output location',
+                default_value='/tmp/test_results.xml',
             ),
         ]
 
