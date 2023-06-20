@@ -18,16 +18,16 @@ find_package(rclcpp REQUIRED)
 ###########
 
 # Base Library
-add_library(${PROJECT_NAME} SHARED
+add_library(catch_ros2 SHARED
   src/arguments.cpp
 )
-add_library(${PROJECT_NAME}::${PROJECT_NAME} ALIAS ${PROJECT_NAME})
-target_include_directories(${PROJECT_NAME}
+add_library(catch_ros2::catch_ros2 ALIAS catch_ros2)
+target_include_directories(catch_ros2
   PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
-target_link_libraries(${PROJECT_NAME} PUBLIC
+target_link_libraries(catch_ros2 PUBLIC
   rclcpp::rclcpp Catch2
 )
 
@@ -35,27 +35,27 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 # https://stackoverflow.com/questions/34234446/cmake-is-it-possible-to-build-an-executable-from-only-static-libraries-and-no-s
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/null.cpp "")
 
-add_library(${PROJECT_NAME}_with_main ${CMAKE_CURRENT_BINARY_DIR}/null.cpp)
-add_library(${PROJECT_NAME}::${PROJECT_NAME}_with_main ALIAS ${PROJECT_NAME}_with_main)
-target_link_libraries(${PROJECT_NAME}_with_main PUBLIC
-  ${PROJECT_NAME} Catch2::Catch2WithMain
+add_library(catch_ros2_with_main ${CMAKE_CURRENT_BINARY_DIR}/null.cpp)
+add_library(catch_ros2::catch_ros2_with_main ALIAS catch_ros2_with_main)
+target_link_libraries(catch_ros2_with_main PUBLIC
+  catch_ros2 Catch2::Catch2WithMain
 )
-set_target_properties(${PROJECT_NAME}_with_main
+set_target_properties(catch_ros2_with_main
   PROPERTIES
-  OUTPUT_NAME "${PROJECT_NAME}_with_main"
+  OUTPUT_NAME "catch_ros2_with_main"
 )
 
 # Library with custom main for running nodes
-add_library(${PROJECT_NAME}_with_node_main
+add_library(catch_ros2_with_node_main
   src/main.cpp
 )
-add_library(${PROJECT_NAME}::${PROJECT_NAME}_with_node_main ALIAS ${PROJECT_NAME}_with_node_main)
-target_link_libraries(${PROJECT_NAME}_with_node_main PUBLIC
-  ${PROJECT_NAME} Catch2
+add_library(catch_ros2::catch_ros2_with_node_main ALIAS catch_ros2_with_node_main)
+target_link_libraries(catch_ros2_with_node_main PUBLIC
+  catch_ros2 Catch2
 )
-set_target_properties(${PROJECT_NAME}_with_node_main
+set_target_properties(catch_ros2_with_node_main
   PROPERTIES
-  OUTPUT_NAME "${PROJECT_NAME}_with_node_main"
+  OUTPUT_NAME "catch_ros2_with_node_main"
 )
 
 #############
@@ -63,8 +63,8 @@ set_target_properties(${PROJECT_NAME}_with_node_main
 #############
 
 # install targets
-install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_with_main ${PROJECT_NAME}_with_node_main
-  EXPORT export_${PROJECT_NAME}
+install(TARGETS catch_ros2 catch_ros2_with_main catch_ros2_with_node_main
+  EXPORT export_catch_ros2
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
@@ -74,7 +74,7 @@ install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_with_main ${PROJECT_NAME}_with_n
 install(DIRECTORY include/ DESTINATION include/)
 
 # Install launch utilities
-ament_python_install_package(launch_${PROJECT_NAME} PACKAGE_DIR launch_${PROJECT_NAME})
+ament_python_install_package(launch_catch_ros2 PACKAGE_DIR launch_catch_ros2)
 
 # Install custom test runner
 install(DIRECTORY scripts DESTINATION share/${PROJECT_NAME})
@@ -100,10 +100,10 @@ endif()
 
 # Export old-style CMake variables
 ament_export_include_directories("include")
-ament_export_libraries(${PROJECT_NAME} ${PROJECT_NAME}_with_main ${PROJECT_NAME}_with_node_main)
+ament_export_libraries(catch_ros2 catch_ros2_with_main catch_ros2_with_node_main)
 
 # Export modern CMake targets
-ament_export_targets(export_${PROJECT_NAME})
+ament_export_targets(export_catch_ros2)
 
 ament_export_dependencies(
   Catch2
