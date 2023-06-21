@@ -17,35 +17,35 @@
 #include "catch_ros2/catch_ros2.hpp"
 
 using catch_ros2::tokenize;
+using Catch::Matchers::Equals;
 
 TEST_CASE("tokenize", "[tokenize]") {
-
   SECTION("no quotes") {
     const auto result = tokenize("tokenize me please!");
-    CHECK(result.at(0) == "tokenize");
-    CHECK(result.at(1) == "me");
-    CHECK(result.at(2) == "please!");
+    CHECK_THAT(result.at(0), Equals("tokenize"));
+    CHECK_THAT(result.at(1), Equals("me"));
+    CHECK_THAT(result.at(2), Equals("please!"));
   }
 
   SECTION("quotes") {
     const auto result = tokenize("here is a string \"with some\" quotations \"in it\"");
-    CHECK(result.at(0) == "here");
-    CHECK(result.at(1) == "is");
-    CHECK(result.at(2) == "a");
-    CHECK(result.at(3) == "string");
-    CHECK(result.at(4) == "with some");
-    CHECK(result.at(5) == "quotations");
-    CHECK(result.at(6) == "in it");
+    CHECK_THAT(result.at(0), Equals("here"));
+    CHECK_THAT(result.at(1), Equals("is"));
+    CHECK_THAT(result.at(2), Equals("a"));
+    CHECK_THAT(result.at(3), Equals("string"));
+    CHECK_THAT(result.at(4), Equals("with some"));
+    CHECK_THAT(result.at(5), Equals("quotations"));
+    CHECK_THAT(result.at(6), Equals("in it"));
   }
 }
 
 // Example main can be specified like so. For more information see
 // https://github.com/catchorg/Catch2/blob/devel/docs/own-main.md
-int main( int argc, char* argv[] ) {
-
+int main(int argc, char * argv[])
+{
   // your setup ...
 
-  int result = Catch::Session().run( argc, argv );
+  int result = Catch::Session().run(argc, argv);
 
   // your clean-up...
 
