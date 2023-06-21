@@ -29,6 +29,9 @@ target_include_directories(catch_ros2
 target_link_libraries(catch_ros2 PUBLIC
   rclcpp::rclcpp
 )
+target_compile_definitions(catch_ros2
+  PUBLIC CATCH_AMALGAMATED_CUSTOM_MAIN
+)
 
 # Library with Catch2 default main
 add_library(catch_ros2_with_main SHARED
@@ -93,8 +96,9 @@ if(BUILD_TESTING)
   set(catch_ros2_DIR ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/cmake)
   include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/catch_ros2_add_integration_test.cmake)
 
-  include(examples/unit_test/CMakeLists.txt)
   include(examples/integration_test/CMakeLists.txt)
+  include(examples/unit_test/CMakeLists.txt)
+  include(examples/custom_main/CMakeLists.txt)
 endif()
 
 # Export old-style CMake variables

@@ -17,7 +17,7 @@ if(BUILD_TESTING)
     examples/unit_test/example_unit_test.cpp
   )
   # Linking a unit test executable with catch_ros2::catch_ros2_with_main
-  # Provides the default Catch2 main function to the executable.
+  # provides the default Catch2 main function to the executable.
   target_link_libraries(example_unit_test
     catch_ros2::catch_ros2_with_main
   )

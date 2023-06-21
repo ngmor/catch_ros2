@@ -13,12 +13,11 @@
 // limitations under the License.
 
 /// \file
-/// \brief Rename catch_amalgamated.hpp to just catch.hpp and ignore Catch2's default main
+/// \brief Rename catch_amalgamated.hpp to just catch.hpp to stay consistent with catch_ros2
+/// header include format, but retain unedited amalgamated Catch2 files
 
 #ifndef CATCH_ROS2__CATCH_HPP_
 #define CATCH_ROS2__CATCH_HPP_
-
-#define CATCH_AMALGAMATED_CUSTOM_MAIN
 
 #include "catch_amalgamated.hpp"
 
