@@ -43,27 +43,25 @@ set_target_properties(catch_ros2_with_main
   OUTPUT_NAME "catch_ros2_with_main"
 )
 
-# TODO
-# # Library with custom main for running nodes
-# add_library(catch_ros2_with_node_main
-#   src/main.cpp
-# )
-# add_library(catch_ros2::catch_ros2_with_node_main ALIAS catch_ros2_with_node_main)
-# target_link_libraries(catch_ros2_with_node_main PUBLIC
-#   catch_ros2 Catch2
-# )
-# set_target_properties(catch_ros2_with_node_main
-#   PROPERTIES
-#   OUTPUT_NAME "catch_ros2_with_node_main"
-# )
+# Library with custom main for running nodes
+add_library(catch_ros2_with_node_main
+  src/node_main.cpp
+)
+add_library(catch_ros2::catch_ros2_with_node_main ALIAS catch_ros2_with_node_main)
+target_link_libraries(catch_ros2_with_node_main PUBLIC
+  catch_ros2
+)
+set_target_properties(catch_ros2_with_node_main
+  PROPERTIES
+  OUTPUT_NAME "catch_ros2_with_node_main"
+)
 
 #############
 ## Install ##
 #############
 
 # install targets
-# TODO
-install(TARGETS catch_ros2 catch_ros2_with_main # catch_ros2_with_node_main
+install(TARGETS catch_ros2 catch_ros2_with_main catch_ros2_with_node_main
   EXPORT export_catch_ros2
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
@@ -95,15 +93,13 @@ if(BUILD_TESTING)
   set(catch_ros2_DIR ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/cmake)
   include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/catch_ros2_add_integration_test.cmake)
 
-  # TODO
-  # include(examples/integration_test/CMakeLists.txt)
   include(examples/unit_test/CMakeLists.txt)
+  include(examples/integration_test/CMakeLists.txt)
 endif()
 
 # Export old-style CMake variables
 ament_export_include_directories("include")
-# TODO
-# ament_export_libraries(catch_ros2 catch_ros2_with_main catch_ros2_with_node_main)
+ament_export_libraries(catch_ros2 catch_ros2_with_main catch_ros2_with_node_main)
 
 # Export modern CMake targets
 ament_export_targets(export_catch_ros2)

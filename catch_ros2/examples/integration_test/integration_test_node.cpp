@@ -16,7 +16,7 @@
 /// It simply checks if the "test_service" service is available at least once
 /// during the duration of the test.
 
-#include <catch2/catch_test_macros.hpp>
+#include "catch_ros2/catch_ros2.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "std_srvs/srv/empty.hpp"
 
