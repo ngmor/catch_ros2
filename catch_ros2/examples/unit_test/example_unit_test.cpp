@@ -14,8 +14,7 @@
 
 /// @file - Example unit tests using catch_ros2 utilities.
 
-#include <catch2/catch_test_macros.hpp>
-#include "catch_ros2/arguments.hpp"
+#include "catch_ros2/catch_ros2.hpp"
 #include "rclcpp/rclcpp.hpp"
 
 using catch_ros2::SimulateArgs;

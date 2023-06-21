@@ -13,14 +13,13 @@
 // limitations under the License.
 
 /// \file
-/// \brief Main header file for catch_ros2 library
-/// This header just includes all the headers for easier use,
-/// but you may include headers of individual features instead if you want
+/// \brief Rename catch_amalgamated.hpp to just catch.hpp and ignore Catch2's default main
 
-#ifndef CATCH_ROS2__CATCH_ROS2_HPP_
-#define CATCH_ROS2__CATCH_ROS2_HPP_
+#ifndef CATCH_ROS2__CATCH_HPP_
+#define CATCH_ROS2__CATCH_HPP_
 
-#include "catch_ros2/arguments.hpp"
-#include "catch_ros2/catch.hpp"
+#define CATCH_AMALGAMATED_CUSTOM_MAIN
 
-#endif  // CATCH_ROS2__CATCH_ROS2_HPP_
+#include "catch_amalgamated.hpp"
+
+#endif  // CATCH_ROS2__CATCH_HPP_

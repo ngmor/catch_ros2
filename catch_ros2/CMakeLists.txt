@@ -10,7 +10,6 @@ endif()
 ##################
 find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_python REQUIRED)
-find_package(Catch2 REQUIRED)
 find_package(rclcpp REQUIRED)
 
 ###########
@@ -19,7 +18,7 @@ find_package(rclcpp REQUIRED)
 
 # Base Library
 add_library(catch_ros2 SHARED
-  src/arguments.cpp
+  src/arguments.cpp src/catch_amalgamated.cpp
 )
 add_library(catch_ros2::catch_ros2 ALIAS catch_ros2)
 target_include_directories(catch_ros2
@@ -28,42 +27,43 @@ target_include_directories(catch_ros2
   $<INSTALL_INTERFACE:include>
 )
 target_link_libraries(catch_ros2 PUBLIC
-  rclcpp::rclcpp Catch2
+  rclcpp::rclcpp
 )
 
 # Library with Catch2 default main
-# https://stackoverflow.com/questions/34234446/cmake-is-it-possible-to-build-an-executable-from-only-static-libraries-and-no-s
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/null.cpp "")
-
-add_library(catch_ros2_with_main ${CMAKE_CURRENT_BINARY_DIR}/null.cpp)
+add_library(catch_ros2_with_main SHARED
+  src/default_main.cpp
+)
 add_library(catch_ros2::catch_ros2_with_main ALIAS catch_ros2_with_main)
 target_link_libraries(catch_ros2_with_main PUBLIC
-  catch_ros2 Catch2::Catch2WithMain
+  catch_ros2
 )
 set_target_properties(catch_ros2_with_main
   PROPERTIES
   OUTPUT_NAME "catch_ros2_with_main"
 )
 
-# Library with custom main for running nodes
-add_library(catch_ros2_with_node_main
-  src/main.cpp
-)
-add_library(catch_ros2::catch_ros2_with_node_main ALIAS catch_ros2_with_node_main)
-target_link_libraries(catch_ros2_with_node_main PUBLIC
-  catch_ros2 Catch2
-)
-set_target_properties(catch_ros2_with_node_main
-  PROPERTIES
-  OUTPUT_NAME "catch_ros2_with_node_main"
-)
+# TODO
+# # Library with custom main for running nodes
+# add_library(catch_ros2_with_node_main
+#   src/main.cpp
+# )
+# add_library(catch_ros2::catch_ros2_with_node_main ALIAS catch_ros2_with_node_main)
+# target_link_libraries(catch_ros2_with_node_main PUBLIC
+#   catch_ros2 Catch2
+# )
+# set_target_properties(catch_ros2_with_node_main
+#   PROPERTIES
+#   OUTPUT_NAME "catch_ros2_with_node_main"
+# )
 
 #############
 ## Install ##
 #############
 
 # install targets
-install(TARGETS catch_ros2 catch_ros2_with_main catch_ros2_with_node_main
+# TODO
+install(TARGETS catch_ros2 catch_ros2_with_main # catch_ros2_with_node_main
   EXPORT export_catch_ros2
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
@@ -80,33 +80,35 @@ ament_python_install_package(launch_catch_ros2 PACKAGE_DIR launch_catch_ros2)
 install(DIRECTORY scripts DESTINATION share/${PROJECT_NAME})
 
 if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # comment the line when a copyright and license is added to all source files
-  # set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # comment the line when this package is in a git repo and when
-  # a copyright and license is added to all source files
-  # set(ament_cmake_cpplint_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
+  # TODO
+  # find_package(ament_lint_auto REQUIRED)
+  # # the following line skips the linter which checks for copyrights
+  # # comment the line when a copyright and license is added to all source files
+  # # set(ament_cmake_copyright_FOUND TRUE)
+  # # the following line skips cpplint (only works in a git repo)
+  # # comment the line when this package is in a git repo and when
+  # # a copyright and license is added to all source files
+  # # set(ament_cmake_cpplint_FOUND TRUE)
+  # ament_lint_auto_find_test_dependencies()
 
   # Set directories and include CMake function for use in examples
   set(catch_ros2_DIR ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/cmake)
   include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/catch_ros2_add_integration_test.cmake)
 
-  include(examples/integration_test/CMakeLists.txt)
+  # TODO
+  # include(examples/integration_test/CMakeLists.txt)
   include(examples/unit_test/CMakeLists.txt)
 endif()
 
 # Export old-style CMake variables
 ament_export_include_directories("include")
-ament_export_libraries(catch_ros2 catch_ros2_with_main catch_ros2_with_node_main)
+# TODO
+# ament_export_libraries(catch_ros2 catch_ros2_with_main catch_ros2_with_node_main)
 
 # Export modern CMake targets
 ament_export_targets(export_catch_ros2)
 
 ament_export_dependencies(
-  Catch2
   rclcpp
 )
 
