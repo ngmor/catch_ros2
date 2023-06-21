@@ -1,6 +1,14 @@
-//TODO document
-// copied from catch_amalgamated.cpp
+//              Copyright Catch2 Authors
+// Distributed under the Boost Software License, Version 1.0.
+//   (See accompanying file LICENSE.txt or copy at
+//        https://www.boost.org/LICENSE_1_0.txt)
 
+// SPDX-License-Identifier: BSL-1.0
+
+//  Catch v3.3.2
+
+/// @file
+/// @brief default Catch2 v3.3.2 main, copied from catch_amalgamated.cpp
 
 #include "catch_ros2/catch.hpp"
 

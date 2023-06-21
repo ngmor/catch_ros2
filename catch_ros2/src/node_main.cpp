@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/// @file
+/// @brief default node main, which initializes ROS and passes ROS arguments to the node
+/// without passing them to the Catch session. On exit, it shuts down ROS.
+
 #include "catch_ros2/catch_ros2.hpp"
 #include "rclcpp/rclcpp.hpp"
 
