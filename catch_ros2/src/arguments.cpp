@@ -29,11 +29,17 @@ SimulateArgs::SimulateArgs(const std::vector<std::string> args)
   generate_argv_vec_();
 }
 
-// SimulateArgs::SimulateArgs(const std::string & node_path, const std::string & args)
-// : args_{tokenize(node_path + " " + args)}
-// {
+SimulateArgs::SimulateArgs(const std::string & executable_path, const std::string & args)
+: SimulateArgs(executable_path, tokenize(args))
+{
+}
 
-// }
+SimulateArgs::SimulateArgs(const std::string & executable_path, const std::vector<std::string> args)
+: executable_path_{executable_path}
+, args_{args}
+{
+  generate_argv_vec_();
+}
 
 int SimulateArgs::argc() const {return argv_vec_.size() - 1;}
 
@@ -41,6 +47,9 @@ const char * const * SimulateArgs::argv() const {return argv_vec_.data();}
 
 void SimulateArgs::generate_argv_vec_()
 {
+  // Insert executable path as first argument
+  args_.insert(args_.begin(), executable_path_);
+
   // Adapted from
   // https://stackoverflow.com/questions/39883433/create-argc-argv-in-the-code
 
