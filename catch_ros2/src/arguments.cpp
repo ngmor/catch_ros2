@@ -26,28 +26,11 @@ SimulateArgs::SimulateArgs(const std::string & args, bool omit_executable_path)
 SimulateArgs::SimulateArgs(const std::vector<std::string> args, bool omit_executable_path)
 : args_{args}
 {
-  if (omit_executable_path)
+  if (!omit_executable_path)
   {
-    executable_path_ = "";
+    args_.insert(args_.begin(), "/path/to/executable");
   }
 
-  generate_argv_vec_();
-}
-
-SimulateArgs::SimulateArgs(const std::string & executable_path, const std::string & args)
-: SimulateArgs(executable_path, tokenize(args))
-{
-}
-
-SimulateArgs::SimulateArgs(const std::string & executable_path, const char * args)
-: SimulateArgs(executable_path, std::string{args})
-{
-}
-
-SimulateArgs::SimulateArgs(const std::string & executable_path, const std::vector<std::string> args)
-: executable_path_{executable_path}
-, args_{args}
-{
   generate_argv_vec_();
 }
 
@@ -57,12 +40,6 @@ const char * const * SimulateArgs::argv() const {return argv_vec_.data();}
 
 void SimulateArgs::generate_argv_vec_()
 {
-  // Insert executable path as first argument if there is one
-  if (executable_path_ != "")
-  {
-    args_.insert(args_.begin(), executable_path_);
-  }
-
   // Adapted from
   // https://stackoverflow.com/questions/39883433/create-argc-argv-in-the-code
 

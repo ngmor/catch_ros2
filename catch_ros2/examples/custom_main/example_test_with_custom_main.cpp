@@ -70,37 +70,19 @@ TEST_CASE("SimulateArgs", "[SimulateArgs]")
   {
     // Second boolean argument omits the default executable path
     // from the simulated arguments
-    SimulateArgs args {"Houston we have \"a problem\"", true};
-    CHECK(args.argc() == 4);
-    CHECK_THAT(*(args.argv() + 0), Equals("Houston"));
-    CHECK_THAT(*(args.argv() + 1), Equals("we"));
-    CHECK_THAT(*(args.argv() + 2), Equals("have"));
-    CHECK_THAT(*(args.argv() + 3), Equals("a problem"));
-  }
-  SECTION("vector, omit executable path")
-  {
-    const std::vector<std::string> arg_vec {"--ros-args", "-p", "rate:=100"};
-    // Second boolean argument omits the default executable path
-    // from the simulated arguments
-    SimulateArgs args {arg_vec, true};
-    CHECK(args.argc() == 3);
-    CHECK_THAT(*(args.argv() + 0), Equals("--ros-args"));
-    CHECK_THAT(*(args.argv() + 1), Equals("-p"));
-    CHECK_THAT(*(args.argv() + 2), Equals("rate:=100"));
-  }
-  SECTION("string, custom exectable path")
-  {
-    SimulateArgs args {"/millenium/falcon", "--kessel-run-parsecs 12"};
+    SimulateArgs args {"/millenium/falcon --kessel-run-parsecs 12", true};
     CHECK(args.argc() == 3);
     CHECK_THAT(*(args.argv() + 0), Equals("/millenium/falcon"));
     CHECK_THAT(*(args.argv() + 1), Equals("--kessel-run-parsecs"));
     CHECK_THAT(*(args.argv() + 2), Equals("12"));
   }
-  SECTION("vector, custom executable path")
+  SECTION("vector, omit executable path")
   {
+    // Second boolean argument omits the default executable path
+    // from the simulated arguments
     SimulateArgs args {
-      "/bin/reach",
-      std::vector<std::string>({"--current-objective", "survive"})
+      std::vector<std::string>({"/bin/reach", "--current-objective", "survive"}),
+      true
     };
     CHECK(args.argc() == 3);
     CHECK_THAT(*(args.argv() + 0), Equals("/bin/reach"));

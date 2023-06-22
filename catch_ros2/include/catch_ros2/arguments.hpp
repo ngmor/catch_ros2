@@ -37,14 +37,6 @@ public:
   /// @param args - vector of arguments
   explicit SimulateArgs(const std::vector<std::string> args, bool omit_executable_path = false);
 
-  // TODO document
-
-  SimulateArgs(const std::string & executable_path, const std::string & args);
-
-  SimulateArgs(const std::string & executable_path, const char * args);
-
-  SimulateArgs(const std::string & executable_path, const std::vector<std::string> args);
-
   /// @brief generate argc
   /// @return argc, argument count
   int argc() const;
@@ -54,11 +46,6 @@ public:
   const char * const * argv() const;
 
 private:
-  /// @brief the first argument provided is always the path to the executable.
-  /// for ease of use (and since this is generally not used), here this path
-  /// defaults to a fake path.
-  std::string executable_path_ = "/path/to/executable";
-
   /// @brief string argument data
   std::vector<std::string> args_ {};
 
