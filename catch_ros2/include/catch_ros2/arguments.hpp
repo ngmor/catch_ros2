@@ -27,14 +27,20 @@ namespace catch_ros2
 class SimulateArgs
 {
 public:
-  // TODO document about path
-
   /// @brief Parse string into data structures that can be used to generate simulated argc/argvs
   /// @param args - command string to parse into arguments
+  /// @param omit_executable_path - since the first argument is always a path to the
+  /// executable, by default this class prepends a default (fake) path to the provided
+  /// argument list. To omit this default path (for example, if you'd like to provide)
+  /// your own in the input args), set this boolean argument to true.
   explicit SimulateArgs(const std::string & args, bool omit_executable_path = false);
 
   /// @brief Store vector of arguments for use simulating arguments
   /// @param args - vector of arguments
+  /// @param omit_executable_path - since the first argument is always a path to the
+  /// executable, by default this class prepends a default (fake) path to the provided
+  /// argument list. To omit this default path (for example, if you'd like to provide)
+  /// your own in the input args), set this boolean argument to true.
   explicit SimulateArgs(const std::vector<std::string> args, bool omit_executable_path = false);
 
   /// @brief generate argc

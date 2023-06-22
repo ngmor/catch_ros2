@@ -26,8 +26,7 @@ SimulateArgs::SimulateArgs(const std::string & args, bool omit_executable_path)
 SimulateArgs::SimulateArgs(const std::vector<std::string> args, bool omit_executable_path)
 : args_{args}
 {
-  if (!omit_executable_path)
-  {
+  if (!omit_executable_path) {
     args_.insert(args_.begin(), "/path/to/executable");
   }
 

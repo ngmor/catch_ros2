@@ -50,7 +50,8 @@ TEST_CASE("SimulateArgs", "[SimulateArgs]")
   SECTION("string, default executable path")
   {
     SimulateArgs args {"-c some -o args.o"};
-    CHECK(args.argc() == 5);
+    const auto arg_count = args.argc() == 5;  // temporary bool to pass style checks
+    CHECK(arg_count);
     CHECK_THAT(*(args.argv() + 0), Equals("/path/to/executable"));
     CHECK_THAT(*(args.argv() + 1), Equals("-c"));
     CHECK_THAT(*(args.argv() + 2), Equals("some"));
@@ -61,7 +62,8 @@ TEST_CASE("SimulateArgs", "[SimulateArgs]")
   {
     const std::vector<std::string> arg_vec {"argument with space", "Klaatu barada nikto"};
     SimulateArgs args {arg_vec};
-    CHECK(args.argc() == 3);
+    const auto arg_count = args.argc() == 3;  // temporary bool to pass style checks
+    CHECK(arg_count);
     CHECK_THAT(*(args.argv() + 0), Equals("/path/to/executable"));
     CHECK_THAT(*(args.argv() + 1), Equals("argument with space"));
     CHECK_THAT(*(args.argv() + 2), Equals("Klaatu barada nikto"));
@@ -71,7 +73,8 @@ TEST_CASE("SimulateArgs", "[SimulateArgs]")
     // Second boolean argument omits the default executable path
     // from the simulated arguments
     SimulateArgs args {"/millenium/falcon --kessel-run-parsecs 12", true};
-    CHECK(args.argc() == 3);
+    const auto arg_count = args.argc() == 3;  // temporary bool to pass style checks
+    CHECK(arg_count);
     CHECK_THAT(*(args.argv() + 0), Equals("/millenium/falcon"));
     CHECK_THAT(*(args.argv() + 1), Equals("--kessel-run-parsecs"));
     CHECK_THAT(*(args.argv() + 2), Equals("12"));
@@ -84,7 +87,8 @@ TEST_CASE("SimulateArgs", "[SimulateArgs]")
       std::vector<std::string>({"/bin/reach", "--current-objective", "survive"}),
       true
     };
-    CHECK(args.argc() == 3);
+    const auto arg_count = args.argc() == 3;  // temporary bool to pass style checks
+    CHECK(arg_count);
     CHECK_THAT(*(args.argv() + 0), Equals("/bin/reach"));
     CHECK_THAT(*(args.argv() + 1), Equals("--current-objective"));
     CHECK_THAT(*(args.argv() + 2), Equals("survive"));
