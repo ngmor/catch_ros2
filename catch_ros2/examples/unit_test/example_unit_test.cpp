@@ -21,7 +21,7 @@ using catch_ros2::SimulateArgs;
 
 TEST_CASE("parameters", "[parameters]") {
   // The SimulateArgs class can be used to synthesize input arguments for rclcpp::init()
-  const auto args = SimulateArgs{"/fake/path --ros-args -p param1:=-1.4 -p param3:=14"};
+  const auto args = SimulateArgs{"--ros-args -p param1:=-1.4 -p param3:=14"};
 
   // Initialize ROS with simulated arguments
   rclcpp::init(args.argc(), args.argv());
@@ -55,7 +55,7 @@ TEST_CASE("parameters", "[parameters]") {
 TEST_CASE("complex parameters", "[parameters]") {
   // The SimulateArgs class can also be used with more complex parameters included quotation marks
   const auto args = SimulateArgs{
-    "/fake/path --ros-args -p param1:=1 "
+    "--ros-args -p param1:=1 "
     "-p param2:=\"[2.0, 3.0, 4.0]\" -p param3:=\"/path/with spaces/\""
   };
 

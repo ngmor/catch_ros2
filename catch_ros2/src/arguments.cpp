@@ -39,6 +39,11 @@ SimulateArgs::SimulateArgs(const std::string & executable_path, const std::strin
 {
 }
 
+SimulateArgs::SimulateArgs(const std::string & executable_path, const char * args)
+: SimulateArgs(executable_path, std::string{args})
+{
+}
+
 SimulateArgs::SimulateArgs(const std::string & executable_path, const std::vector<std::string> args)
 : executable_path_{executable_path}
 , args_{args}

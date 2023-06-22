@@ -41,6 +41,8 @@ public:
 
   SimulateArgs(const std::string & executable_path, const std::string & args);
 
+  SimulateArgs(const std::string & executable_path, const char * args);
+
   SimulateArgs(const std::string & executable_path, const std::vector<std::string> args);
 
   /// @brief generate argc
@@ -53,7 +55,7 @@ public:
 
 private:
   /// @brief the first argument provided is always the path to the executable.
-  /// for ease of use (and since this is generaly not used), here this path
+  /// for ease of use (and since this is generally not used), here this path
   /// defaults to a fake path.
   std::string executable_path_ = "/path/to/executable";
 
