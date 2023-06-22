@@ -93,6 +93,22 @@ TEST_CASE("SimulateArgs", "[SimulateArgs]")
     CHECK_THAT(*(args.argv() + 1), Equals("--current-objective"));
     CHECK_THAT(*(args.argv() + 2), Equals("survive"));
   }
+
+  // An empty argument list should have argc == 0 and argv is NULL
+  SECTION("string, empty arg list")
+  {
+    SimulateArgs args {"", true};
+    const auto arg_count = args.argc() == 0;  // temporary bool to pass style checks
+    CHECK(arg_count);
+    CHECK_FALSE(args.argv());
+  }
+  SECTION("vector, empty arg list")
+  {
+    SimulateArgs args {std::vector<std::string>(), true};
+    const auto arg_count = args.argc() == 0;  // temporary bool to pass style checks
+    CHECK(arg_count);
+    CHECK_FALSE(args.argv());
+  }
 }
 
 // Example main can be specified like so. For more information see

@@ -35,7 +35,14 @@ SimulateArgs::SimulateArgs(const std::vector<std::string> args, bool omit_execut
 
 int SimulateArgs::argc() const {return argv_vec_.size() - 1;}
 
-const char * const * SimulateArgs::argv() const {return argv_vec_.data();}
+const char * const * SimulateArgs::argv() const
+{
+  if (!(argc() == 0)) {
+    return argv_vec_.data();
+  } else {
+    return nullptr;
+  }
+}
 
 void SimulateArgs::generate_argv_vec_()
 {
