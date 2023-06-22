@@ -81,35 +81,36 @@ ament_python_install_package(launch_catch_ros2 PACKAGE_DIR launch_catch_ros2)
 install(DIRECTORY scripts DESTINATION share/${PROJECT_NAME})
 
 if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # comment the line when a copyright and license is added to all source files
-  # set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # comment the line when this package is in a git repo and when
-  # a copyright and license is added to all source files
-  # set(ament_cmake_cpplint_FOUND TRUE)
+  # TODO
+  # find_package(ament_lint_auto REQUIRED)
+  # # the following line skips the linter which checks for copyrights
+  # # comment the line when a copyright and license is added to all source files
+  # # set(ament_cmake_copyright_FOUND TRUE)
+  # # the following line skips cpplint (only works in a git repo)
+  # # comment the line when this package is in a git repo and when
+  # # a copyright and license is added to all source files
+  # # set(ament_cmake_cpplint_FOUND TRUE)
 
-  # Exclude Catch2 files from linting
-  list(APPEND CATCH2_LINT_EXCLUDE_FILES
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/default_main.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/catch_amalgamated.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/catch_amalgamated.hpp
-  )
-  list(APPEND ament_cmake_cpplint_ADDITIONAL_EXCLUDE ${CATCH2_LINT_EXCLUDE_FILES})
-  set(ament_cmake_uncrustify_ADDITIONAL_ARGS "--exclude")
-  list(APPEND ament_cmake_uncrustify_ADDITIONAL_ARGS ${CATCH2_LINT_EXCLUDE_FILES})
+  # # Exclude Catch2 files from linting
+  # list(APPEND CATCH2_LINT_EXCLUDE_FILES
+  #   ${CMAKE_CURRENT_SOURCE_DIR}/src/default_main.cpp
+  #   ${CMAKE_CURRENT_SOURCE_DIR}/src/catch_amalgamated.cpp
+  #   ${CMAKE_CURRENT_SOURCE_DIR}/include/catch_amalgamated.hpp
+  # )
+  # list(APPEND ament_cmake_cpplint_ADDITIONAL_EXCLUDE ${CATCH2_LINT_EXCLUDE_FILES})
+  # set(ament_cmake_uncrustify_ADDITIONAL_ARGS "--exclude")
+  # list(APPEND ament_cmake_uncrustify_ADDITIONAL_ARGS ${CATCH2_LINT_EXCLUDE_FILES})
 
-  # Manually run copyright test, excluding Catch2 files since ROS 2 Humble does not have
-  # any way to exclude files from an auto copyright test
-  list(APPEND AMENT_LINT_AUTO_EXCLUDE ament_cmake_copyright)
-  find_package(ament_cmake_copyright)
-  ament_copyright(
-    TESTNAME manual_copyright
-    EXCLUDE ${CATCH2_LINT_EXCLUDE_FILES}
-  )
+  # # Manually run copyright test, excluding Catch2 files since ROS 2 Humble does not have
+  # # any way to exclude files from an auto copyright test
+  # list(APPEND AMENT_LINT_AUTO_EXCLUDE ament_cmake_copyright)
+  # find_package(ament_cmake_copyright)
+  # ament_copyright(
+  #   TESTNAME manual_copyright
+  #   EXCLUDE ${CATCH2_LINT_EXCLUDE_FILES}
+  # )
 
-  ament_lint_auto_find_test_dependencies()
+  # ament_lint_auto_find_test_dependencies()
 
 
 

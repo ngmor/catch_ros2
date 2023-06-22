@@ -19,18 +19,21 @@
 namespace catch_ros2
 {
 SimulateArgs::SimulateArgs(const std::string & args)
-: args_{tokenize(args)}
+: SimulateArgs(tokenize(args))
 {
-  // Generate argv_vec_
-  generate_argv_vec_();
 }
 
 SimulateArgs::SimulateArgs(const std::vector<std::string> args)
 : args_{args}
 {
-  // Generate argv_vec_
   generate_argv_vec_();
 }
+
+// SimulateArgs::SimulateArgs(const std::string & node_path, const std::string & args)
+// : args_{tokenize(node_path + " " + args)}
+// {
+
+// }
 
 int SimulateArgs::argc() const {return argv_vec_.size() - 1;}
 

@@ -35,6 +35,12 @@ public:
   /// @param args - vector of arguments
   explicit SimulateArgs(const std::vector<std::string> args);
 
+  // TODO document
+
+  // SimulateArgs(const std::string & node_path, const std::string & args);
+
+  // SimulateArgs(const std::string & node_path, const std::vector<std::string> args);
+
   /// @brief generate argc
   /// @return argc, argument count
   int argc() const;
