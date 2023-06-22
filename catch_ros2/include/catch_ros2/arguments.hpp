@@ -31,11 +31,11 @@ public:
 
   /// @brief Parse string into data structures that can be used to generate simulated argc/argvs
   /// @param args - command string to parse into arguments
-  explicit SimulateArgs(const std::string & args);
+  explicit SimulateArgs(const std::string & args, bool omit_executable_path = false);
 
   /// @brief Store vector of arguments for use simulating arguments
   /// @param args - vector of arguments
-  explicit SimulateArgs(const std::vector<std::string> args);
+  explicit SimulateArgs(const std::vector<std::string> args, bool omit_executable_path = false);
 
   // TODO document
 
@@ -55,7 +55,7 @@ private:
   /// @brief the first argument provided is always the path to the executable.
   /// for ease of use (and since this is generaly not used), here this path
   /// defaults to a fake path.
-  const std::string executable_path_ = "/path/to/executable";
+  std::string executable_path_ = "/path/to/executable";
 
   /// @brief string argument data
   std::vector<std::string> args_ {};

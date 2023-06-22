@@ -18,14 +18,19 @@
 
 namespace catch_ros2
 {
-SimulateArgs::SimulateArgs(const std::string & args)
-: SimulateArgs(tokenize(args))
+SimulateArgs::SimulateArgs(const std::string & args, bool omit_executable_path)
+: SimulateArgs(tokenize(args), omit_executable_path)
 {
 }
 
-SimulateArgs::SimulateArgs(const std::vector<std::string> args)
+SimulateArgs::SimulateArgs(const std::vector<std::string> args, bool omit_executable_path)
 : args_{args}
 {
+  if (omit_executable_path)
+  {
+    executable_path_ = "";
+  }
+
   generate_argv_vec_();
 }
 
@@ -47,8 +52,11 @@ const char * const * SimulateArgs::argv() const {return argv_vec_.data();}
 
 void SimulateArgs::generate_argv_vec_()
 {
-  // Insert executable path as first argument
-  args_.insert(args_.begin(), executable_path_);
+  // Insert executable path as first argument if there is one
+  if (executable_path_ != "")
+  {
+    args_.insert(args_.begin(), executable_path_);
+  }
 
   // Adapted from
   // https://stackoverflow.com/questions/39883433/create-argc-argv-in-the-code
@@ -64,7 +72,7 @@ void SimulateArgs::generate_argv_vec_()
 SplitROSArgs::SplitROSArgs(const int argc, const char * const * argv)
 : argc_{argc},
   argv_{argv},
-  args_without_ros_{SimulateArgs{rclcpp::remove_ros_arguments(argc_, argv_)}}
+  args_without_ros_{SimulateArgs{rclcpp::remove_ros_arguments(argc_, argv_), true}}
 {}
 
 int SplitROSArgs::argc() const {return argc_;}
