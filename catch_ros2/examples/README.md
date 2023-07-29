@@ -1,7 +1,5 @@
 # Example Usage
-TODO
-
-These directories contain examples of how to use the `catch_ros2` library. This README provides an overview, but more details can be found in the source code.
+These directories contain examples of how to use the `catch_ros2` library. This README provides an overview, but more details can be found in the links to example source code.
 
 There are two basic ways to use this framework:
 1. [Integration testing](#integration-testing)
@@ -12,7 +10,7 @@ You can also [customize further](#selecting-a-main-function) if you need further
 ## Integration Testing
 Integration testing is an important way to ensure different elements of your system work together as desired. In ROS, we generally want to test that our nodes behave correctly, which may difficult with typical unit testing.
 
-ROS 2 already contains a [framework for writing integration tests in Python](https://github.com/ros2/launch/tree/rolling/launch_testing) which may be more than sufficient for most users. However, to my knowledge, I have not seen an easy way to create integration tests in C++ (or, more specifically, to create them with Catch2). The primary motivation of this package is to provide a framework for just that.
+ROS 2 already contains a [framework for writing integration tests in Python](https://github.com/ros2/launch/tree/rolling/launch_testing) which may be more than sufficient for most users. GTest can also be used to test C++ code within an integration test. However, to my knowledge, I have not seen an easy way to create integration tests in C++ with Catch2 - a simple to use but powerful C++ testing framework. The primary motivation of this package is to provide a framework for just that.
 
 ### Components
 For a launch integration test in this framework you need 4 components:
