@@ -57,6 +57,7 @@ if(BUILD_TESTING)
   install(FILES
     examples/integration_test/example_integration_test.launch.py  # example in Python
     examples/integration_test/example_integration_test.launch.xml  # example in XML
+    examples/integration_test/example_integration_test.launch.yaml  # example in YAML
     DESTINATION share/${PROJECT_NAME}
   )
 
@@ -70,6 +71,9 @@ if(BUILD_TESTING)
   )
   catch_ros2_add_integration_test(ExampleIntegration_TestXML
     LAUNCH_FILE example_integration_test.launch.xml  # example in XML
+  )
+  catch_ros2_add_integration_test(ExampleIntegration_TestYAML
+    LAUNCH_FILE example_integration_test.launch.xml  # example in YAML
   )
 
 endif()

@@ -36,6 +36,8 @@ This launch file is the same as any other ROS 2 Python launch file, but the `lau
 - `Catch2LaunchDescription` - a wrapper around the typical [`launch.LaunchDescription`](https://github.com/ros2/launch/blob/rolling/launch/launch/launch_description.py) that includes a "result_file" argument where the results of the test will be output.
 - `Catch2IntegrationTestNode` - a wrapper around the typical [`launch_ros.actions.Node`](https://github.com/ros2/launch_ros/blob/rolling/launch_ros/launch_ros/actions/node.py) that passes the "result_file" argument to Catch2 (via the default `catch_ros2` node main function) and shuts down all nodes on exit. This should be used to launch the [testing node](#testing-node). Only one should be used per integration test.
 
+[XML](integration_test/example_integration_test.launch.xml) and [YAML](integration_test/example_integration_test.launch.yaml) launch files can also be used - see the provided links for examples of the above Python launch file implemented in those formats.
+
 #### Integration CMake setup
 Most of the [CMake required for this integration test](integration_test/CMakeLists.txt) is pretty standard for a ROS 2 package (though the ROS 2 boilerplate CMake is not shown in this example). Nodes are built/installed and the launch file is installed to the package's share directory.
 

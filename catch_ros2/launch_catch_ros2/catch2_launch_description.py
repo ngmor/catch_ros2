@@ -68,5 +68,7 @@ class Catch2ResultFileLaunchArgument(DeclareLaunchArgument):
         entity: Entity,
         parser: Parser
     ):
+        # Not used, just here to make YAML launch files happy
+        entity.get_attr('description', optional=True)
         kwargs = {}
         return self, kwargs

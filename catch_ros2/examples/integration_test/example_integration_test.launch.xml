@@ -26,8 +26,9 @@ test node (the node which performs the test).
     catch2_launch_file
     A required tag which will add a "result_file" argument for the launch file.
     This file will hold the results of the test.
+    Description attribute of this tag is optional for XML launch files.
     -->
-    <catch2_launch_file/>
+    <catch2_launch_file description='An example Catch2 integration test launch file'/>
 
     <!-- Specific launch arguments can also be included at the user's discretion -->
     <arg 
