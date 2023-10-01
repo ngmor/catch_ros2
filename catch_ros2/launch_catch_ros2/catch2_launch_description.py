@@ -13,6 +13,9 @@
 # limitations under the License.
 
 from launch import LaunchDescription
+from launch.frontend import expose_action
+from launch.frontend import Entity
+from launch.frontend import Parser
 from launch.launch_description_entity import LaunchDescriptionEntity
 from launch.actions import DeclareLaunchArgument
 
@@ -37,13 +40,7 @@ class Catch2LaunchDescription(LaunchDescription):
     ) -> None:
 
         # Add launch arguments for Catch
-        initial_entities_appended = [
-            DeclareLaunchArgument(
-                name='result_file',
-                description='Catch 2 test result file output location',
-                default_value='/tmp/test_results.xml',
-            ),
-        ]
+        initial_entities_appended = [Catch2ResultFileLaunchArgument()]
 
         if initial_entities:
             initial_entities_appended += initial_entities
@@ -52,3 +49,24 @@ class Catch2LaunchDescription(LaunchDescription):
             initial_entities=initial_entities_appended,
             deprecated_reason=deprecated_reason
         )
+
+
+@expose_action('catch2_launch_file')
+class Catch2ResultFileLaunchArgument(DeclareLaunchArgument):
+    """Required result file argument, separated out for use in frontend launch files."""
+
+    def __init__(self):
+        super().__init__(
+            name='result_file',
+            description='Catch 2 test result file output location',
+            default_value='/tmp/test_results.xml',
+        )
+
+    @classmethod
+    def parse(
+        self,
+        entity: Entity,
+        parser: Parser
+    ):
+        kwargs = {}
+        return self, kwargs

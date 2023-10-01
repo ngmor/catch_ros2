@@ -55,7 +55,8 @@ if(BUILD_TESTING)
   #################
   # This is the launch file that will be used to run the integration test
   install(FILES
-    examples/integration_test/example_integration_test.launch.py
+    examples/integration_test/example_integration_test.launch.py  # example in Python
+    examples/integration_test/example_integration_test.launch.xml  # example in XML
     DESTINATION share/${PROJECT_NAME}
   )
 
@@ -64,8 +65,11 @@ if(BUILD_TESTING)
   ######################
   # This CMake function allows the integration test to be run
   # when running "colcon test".
-  catch_ros2_add_integration_test(ExampleIntegration_Test
-    LAUNCH_FILE example_integration_test.launch.py
+  catch_ros2_add_integration_test(ExampleIntegration_TestPython
+    LAUNCH_FILE example_integration_test.launch.py  # example in Python
+  )
+  catch_ros2_add_integration_test(ExampleIntegration_TestXML
+    LAUNCH_FILE example_integration_test.launch.xml  # example in XML
   )
 
 endif()

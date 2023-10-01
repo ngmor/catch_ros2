@@ -13,6 +13,7 @@
 # limitations under the License.
 
 from launch.actions import Shutdown
+from launch.frontend import expose_action
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from typing import Iterable
@@ -24,6 +25,7 @@ from launch_ros.parameters_type import SomeParameters
 from launch_ros.remap_rule_type import SomeRemapRules
 
 
+@expose_action('catch2_integration_test_node')
 class Catch2IntegrationTestNode(Node):
     """
     A wrapper around launch_ros.actions.Node for integration test nodes.

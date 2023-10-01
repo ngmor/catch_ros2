@@ -46,8 +46,8 @@ def generate_launch_description():
         # a wrapper around Node which passes the "result_file" argument to Catch2.
         # There should only be one integration test node. This node will shutdown
         # the entire launch file when it exits.
-        # Specific parameters can also be passed, like the "test_duration" example
-        # below.
+        # Specific parameters and other arguments can also be passed, like the
+        # "test_duration" example below.
         Catch2IntegrationTestNode(
             package='catch_ros2',
             executable='integration_test_node',
