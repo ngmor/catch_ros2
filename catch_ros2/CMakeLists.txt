@@ -75,7 +75,10 @@ install(TARGETS catch_ros2 catch_ros2_with_main catch_ros2_with_node_main
 install(DIRECTORY include/ DESTINATION include/)
 
 # Install launch utilities
-ament_python_install_package(launch_catch_ros2 PACKAGE_DIR launch_catch_ros2)
+ament_python_install_package(launch_catch_ros2
+  PACKAGE_DIR launch_catch_ros2
+  SETUP_CFG setup.cfg
+)
 
 # Install custom test runner
 install(DIRECTORY scripts DESTINATION share/${PROJECT_NAME})
