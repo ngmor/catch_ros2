@@ -2,8 +2,8 @@
 Changelog for package catch_ros2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.0 (2023-10-20)
+------------------
 * Updated to Catch2 v3.4.0
 * Add launch_catch_ros2 Python package to the launch.frontend.launch_extension group
 * Expose launch_catch_ros2 items to frontend (XML/YAML) launch files
