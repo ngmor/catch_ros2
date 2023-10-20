@@ -3,8 +3,14 @@ A lightweight wrapper around the [Catch2](https://github.com/catchorg/Catch2/) t
 
 This can be used for unit testing of ROS 2 related functionality or for integration tests to test the functionality of nodes in C++.
 
-## Building
-To build the package, clone it into the `src` directory of your workspace root directory (`ws`). Then from `ws` use `colcon build`, like any other ROS 2 package.
+## Installation
+To install Debian packages of `catch_ros2` simply run the following command (assuming your environment is properly [set up for installing Debian packages](https://docs.ros.org/en/rolling/Installation/Ubuntu-Install-Debians.html)):
+```
+apt install ros-${ROS_DISTRO}-catch-ros2
+```
+Debian packages are currently available for Humble, Iron, and Rolling ROS 2 distributions.
+
+To build the package from source, clone it into the `src` directory of your workspace root directory (`ws`). Then from `ws` use `colcon build`, like any other ROS 2 package.
 
 ## Usage
 See the [examples](examples/) section for guides on usage.
