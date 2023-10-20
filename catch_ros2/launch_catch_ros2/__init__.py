@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .catch2_launch_description import Catch2LaunchDescription
 from .catch2_integration_test_node import Catch2IntegrationTestNode
+from .catch2_launch_description import Catch2LaunchDescription
 
 __all__ = [
-    'Catch2LaunchDescription',
     'Catch2IntegrationTestNode',
+    'Catch2LaunchDescription',
 ]

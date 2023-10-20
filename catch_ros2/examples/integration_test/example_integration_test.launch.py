@@ -21,8 +21,8 @@ test node (the node which performs the test).
 
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
+from launch_catch_ros2 import Catch2IntegrationTestNode, Catch2LaunchDescription
 from launch_ros.actions import Node
-from launch_catch_ros2 import Catch2LaunchDescription, Catch2IntegrationTestNode
 
 
 def generate_launch_description():

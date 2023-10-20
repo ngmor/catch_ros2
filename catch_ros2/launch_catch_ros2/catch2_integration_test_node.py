@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from launch.actions import Shutdown
-from launch.frontend import expose_action
-from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import Node
 from typing import Iterable
 from typing import Optional
 
+from launch.actions import Shutdown
+from launch.frontend import expose_action
 from launch.some_substitutions_type import SomeSubstitutionsType
+from launch.substitutions import LaunchConfiguration
 
+from launch_ros.actions import Node
 from launch_ros.parameters_type import SomeParameters
 from launch_ros.remap_rule_type import SomeRemapRules
 
