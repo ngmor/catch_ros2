@@ -138,7 +138,7 @@ target_link_libraries(${target_name}
 ```
 
 ## Catch2 Version
-Currently this repository uses the [amalgamated version of Catch2](https://github.com/catchorg/Catch2/blob/devel/docs/migrate-v2-to-v3.md#how-to-migrate-projects-from-v2-to-v3) as a simple way of vendoring v3.3.2 of Catch2. Ubuntu currently only provides Catch2 v2, which ROS 2 depends on, so we've made the decision to vendor v3 to be able to use the newest features. In the future, this approach may be abandoned for vendoring Catch2 v3 in its multiple header form.
+Currently this repository uses the [amalgamated version of Catch2](https://github.com/catchorg/Catch2/blob/devel/docs/migrate-v2-to-v3.md#how-to-migrate-projects-from-v2-to-v3) as a simple way of vendoring v3.4.0 of Catch2. Ubuntu currently only provides Catch2 v2, which ROS 2 depends on, so we've made the decision to vendor v3 to be able to use the newest features. In the future, this approach may be abandoned for vendoring Catch2 v3 in its multiple header form.
 
 In order to update the repository for a future release of Catch2 v3, simply copy the amalgamated [header](https://github.com/catchorg/Catch2/blob/devel/extras/catch_amalgamated.hpp) and [source](https://github.com/catchorg/Catch2/blob/devel/extras/catch_amalgamated.cpp) files from the Catch2 repository and replace those [header](include/catch_amalgamated.hpp) and [source](src/catch_amalgamated.cpp) files in this repository. The [default main](src/default_main.cpp) may also need to be updated.
 

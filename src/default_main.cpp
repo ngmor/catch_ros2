@@ -5,10 +5,10 @@
 
 // SPDX-License-Identifier: BSL-1.0
 
-//  Catch v3.3.2
+//  Catch v3.4.0
 
 /// @file
-/// @brief default Catch2 v3.3.2 main, copied from catch_amalgamated.cpp
+/// @brief default Catch2 v3.4.0 main, copied from catch_amalgamated.cpp
 
 #include "catch_ros2/catch.hpp"
 
