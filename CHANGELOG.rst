@@ -2,8 +2,8 @@
 Changelog for package catch_ros2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.1 (2024-04-13)
+------------------
 * Updated to Catch2 v3.5.4
 * Contributors: Nick Morales
 
