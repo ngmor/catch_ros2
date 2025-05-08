@@ -18,8 +18,9 @@ find_package(std_srvs REQUIRED)
 add_executable(integration_aux_node
   examples/integration_test/integration_aux_node.cpp
 )
-ament_target_dependencies(integration_aux_node
-  rclcpp std_srvs
+target_link_libraries(integration_aux_node PUBLIC
+  rclcpp
+  std_srvs
 )
 
 install(TARGETS
