@@ -8,7 +8,7 @@ To install Debian packages of `catch_ros2` simply run the following command (ass
 ```
 apt install ros-${ROS_DISTRO}-catch-ros2
 ```
-Debian packages are currently available for Humble, Iron, Jazzy, and Rolling ROS 2 distributions.
+Debian packages are currently available for Humble, Iron, Jazzy, Kilted, and Rolling ROS 2 distributions.
 
 To build the package from source, clone it into the `src` directory of your workspace root directory (`ws`). Then from `ws` use `colcon build`, like any other ROS 2 package.
 
