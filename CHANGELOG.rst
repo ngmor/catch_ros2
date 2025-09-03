@@ -2,8 +2,8 @@
 Changelog for package catch_ros2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.2 (2025-09-03)
+------------------
 * Revert to Catch2 v3.4.0 to standardize with Ubuntu 24.04-provided Catch2 version
 * Contributors: Nick Morales
 
