@@ -2,8 +2,8 @@
 Changelog for package catch_ros2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.3 (2025-09-06)
+------------------
 * [kilted] Update deprecated call to ament_target_dependencies
 * Contributors: David V. Lu, Nick Morales
 
