@@ -18,8 +18,9 @@ find_package(std_srvs REQUIRED)
 add_executable(integration_aux_node
   examples/integration_test/integration_aux_node.cpp
 )
-ament_target_dependencies(integration_aux_node
-  rclcpp std_srvs
+target_link_libraries(integration_aux_node PUBLIC
+  ${std_srvs_TARGETS}
+  rclcpp::rclcpp
 )
 
 install(TARGETS
@@ -41,10 +42,9 @@ if(BUILD_TESTING)
   # to get the default integration test node main function
   target_link_libraries(integration_test_node
     catch_ros2::catch_ros2_with_node_main
-  )
-  ament_target_dependencies(integration_test_node
-    rclcpp std_srvs
-  )
+    ${std_srvs_TARGETS}
+    rclcpp::rclcpp
+)
   install(TARGETS
     integration_test_node
     DESTINATION lib/${PROJECT_NAME}
